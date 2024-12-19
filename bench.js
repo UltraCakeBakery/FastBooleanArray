@@ -26,7 +26,7 @@ function testBooleanArraySet(amount, analyzeMemory = true) {
 		theBooleanArray.set(i, true);
 	}
 	const endTime = performance.now();
-	const usedMemory = analyzeMemory ? getMemoryUsageOfReference(theBooleanArray) : 0;
+	const usedMemory = analyzeMemory ? getMemoryUsageOfReference(theBooleanArray.buffer) : 0;
 	return { theBooleanArray, usedMemory, startTime, endTime };
 }
 testBooleanArraySet._name = 'Set Fast Boolean Array';
@@ -62,7 +62,7 @@ function testBooleanArrayGet(amount) {
 testBooleanArrayGet._name = 'Get Fast Boolean Array';
 
 function performanceTest(test, amount) {
-	const runs = 1000; // Number of times to run the test
+	const runs = 10; // Number of times to run the test
 	let totalTime = 0;
 	let totalMemory = 0;
 
