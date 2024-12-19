@@ -1,6 +1,6 @@
 {
   "name": "fast-boolean-array",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "homepage": "https://github.com/UltraCakeBakery/FastBooleanArray",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
   "scripts": {
     "check": "npm run check:types",
     "check:types": "npx --yes @arethetypeswrong/cli --pack .",
-    "build": "tsup src/index.ts --dts --format cjs,esm --clean --sourcemap"
+    "build": "tsup src/index.ts --dts --format cjs,esm --clean --sourcemap --minify"
   },
   "keywords": [
     "boolean",
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
-    "tsup": "^8.3.5"
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
   }
 }
