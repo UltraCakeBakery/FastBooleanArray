@@ -43,8 +43,10 @@ booleans.set(1, false);
 console.log(booleans.get(0)); // Output: true
 console.log(booleans.get(1)); // Output: false
 
-booleans.set(3, false); // will throw as the array is only 3 in size
-console.log(booleans.get(1)); // Output: false
+booleans.set(3, true); // will not throw, but returns false as the boolean is not found
+console.log(booleans.get(3)); // Output: false
+
+booleans.setSafe(3, true); // will throw out of bounds error
 ```
 
 ---
