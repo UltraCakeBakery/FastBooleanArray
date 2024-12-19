@@ -8,37 +8,63 @@ export default class FastBooleanArray {
 	}
 
 	/**
-	 * Set a boolean at a specific index
-	 * @throws {RangeError} if `input` is less than `0` or more than the array `size`
+	 * Sets a boolean value at the specified index.
+	 * @param {number} index - The index to set the boolean value at.
+	 * @param {number} value - The boolean value to set the `index`.
+	 * @returns {boolean} The boolean value that was set.
 	 */
-	set(input: number, value: boolean) {
-		if (input < 0 || input >= this.size) {
-			throw new RangeError('Index out of bounds');
-		}
+	set(index: number, value: any) {
 		if (value) {
-			this.buffer[input >> 3] |= 1 << (input & 7); // Set bit
+			this.buffer[index >> 3] |= 1 << (index & 7); // Set bit
+			return true;
 		} else {
-			this.buffer[input >> 3] &= ~(1 << (input & 7)); // Clear bit
+			this.buffer[index >> 3] &= ~(1 << (index & 7)); // Clear bit
+			return false;
 		}
-		return value;
 	}
 
 	/**
-	 * Set a boolean at a specific index
-	 * @throws {RangeError} if `input` is less than `0` or more than the array `size`
+	 * like `set` but throws if the index is out of bounds (less than 0 or greater than or equal to the array size).
+	 * @param {number} index - The index to set the boolean value at.
+	 * @param {number} value - The boolean value to set the `index`.
+	 * @returns {boolean} The boolean value that was set.
+	 * @throws {RangeError} If the index is out of bounds (less than 0 or greater than or equal to the array size).
 	 */
-	get(input: number) {
-		if (input < 0 || input >= this.size) {
+	setSafe(index: number, value: any) {
+		if (index < 0 || index >= this.size) {
 			throw new RangeError('Index out of bounds');
 		}
-		return (this.buffer[input >> 3] & (1 << input % 8)) !== 0; // Check bit
+		return this.set(index, value);
+	}
+
+	/**
+	 * Gets a boolean value at the specified index.
+	 * @param {number} index - The index to get the boolean value of.
+	 * @returns {boolean} The boolean value that was set.
+	 * @throws {RangeError} If the index is out of bounds (less than 0 or greater than or equal to the array size).
+	 */
+	get(index: number) {
+		return (this.buffer[index >> 3] & (1 << index % 8)) !== 0; // Check bit
+	}
+
+	/**
+	 * like `get` but throws if the index is out of bounds (less than 0 or greater than or equal to the array size).
+	 * @param {number} index - The index to get the boolean value of.
+	 * @returns {boolean} The boolean value that was set.
+	 * @throws {RangeError} If the index is out of bounds (less than 0 or greater than or equal to the array size).
+	 */
+	getSafe(index: number) {
+		if (index < 0 || index >= this.size) {
+			throw new RangeError('Index out of bounds');
+		}
+		return this.get(index);
 	}
 
 	get length() {
 		return this.size;
 	}
 
-	set length(value: number) {
+	set length(_value: number) {
 		throw new Error("Setting the length on BooleanArray's is not supported");
 	}
 }
