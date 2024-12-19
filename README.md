@@ -1,8 +1,10 @@
 # Fast Boolean Array
 
-In JavaScript, you sometimes need an array of booleans for a specific size. Using a regular JavaScript array works, but it can waste over 8x the memory. This is because JavaScript engines, like V8 (in Chrome and Node.js), represent all primitive types in a uniform way for optimization reasons. While a boolean is conceptually a 1-bit value, JavaScript engines typically allocate 1 byte (8 bits) per boolean value in memory. **Fast Boolean Array** solves this inefficiency by leveraging bit manipulation to store booleans in a compact format. It does bit manipulation on a uInt8Array, storing every boolean as a specific bit on each 8 bit int, fast and efficiently.
+In JavaScript, when working with large arrays of boolean values, a common challenge is efficiently indexing and retrieving these values. Using a regular JavaScript array to store booleans is straightforward, but it is memory-inefficient. While booleans are conceptually 1-bit values, JavaScript engines, like V8 (in Chrome and Node.js), allocate 1 byte (8 bits) per boolean for optimization purposes. This can waste a significant amount of memory when dealing with large arrays.
 
-View detailed benchmark results below.
+Fast Boolean Array solves this issue by utilizing bit manipulation to store booleans in a compact format. It uses a Uint8Array and stores each boolean as a single bit within the 8 bits of each byte. This allows you to index and retrieve boolean values by integers (e.g., the 0th boolean, 1st boolean, etc.) while only using a fraction of the memory. Each bit represents a boolean, and you can quickly access or modify a specific boolean using bitwise operations, making it both fast and memory-efficient.
+
+For detailed benchmark results, see below.
 
 ## Features
 
@@ -40,7 +42,6 @@ booleans.set(1, false);
 // Retrieve it
 console.log(booleans.get(0)); // Output: true
 console.log(booleans.get(1)); // Output: false
-
 
 booleans.set(3, false); // will throw as the array is only 3 in size
 console.log(booleans.get(1)); // Output: false
