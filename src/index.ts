@@ -7,6 +7,10 @@ export default class FastBooleanArray {
 		this.buffer = new Uint8Array(Math.ceil(size / 8)); // Allocate memory
 	}
 
+	/**
+	 * Set a boolean at a specific index
+	 * @throws {RangeError} if `input` is less than `0` or more than the array `size`
+	 */
 	set(input: number, value: boolean) {
 		if (input < 0 || input >= this.size) {
 			throw new RangeError('Index out of bounds');
@@ -16,8 +20,13 @@ export default class FastBooleanArray {
 		} else {
 			this.buffer[input >> 3] &= ~(1 << (input & 7)); // Clear bit
 		}
+		return value;
 	}
 
+	/**
+	 * Set a boolean at a specific index
+	 * @throws {RangeError} if `input` is less than `0` or more than the array `size`
+	 */
 	get(input: number) {
 		if (input < 0 || input >= this.size) {
 			throw new RangeError('Index out of bounds');
