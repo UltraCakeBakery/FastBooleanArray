@@ -1,6 +1,15 @@
 {
   "name": "fast-boolean-array",
-  "version": "1.1.1",
+  "version": "1.1.2",
+  "homepage": "https://github.com/UltraCakeBakery/FastBooleanArray",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UltraCakeBakery/FastBooleanArray.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UltraCakeBakery/FastBooleanArray/issues",
+    "email": "fast-boolean-array@managing.software"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -27,9 +36,12 @@
     "efficient",
     "map"
   ],
-  "author": "Jack van der Bilt",
+  "author": "Jack van der Bil  <jack@managing.software> (https://jackvanderbilt.nl)",
   "license": "MIT",
   "description": "",
+  "engines": {
+    "node": ">=0.10.3"
+  },
   "devDependencies": {
     "tsup": "^8.3.5"
   }
