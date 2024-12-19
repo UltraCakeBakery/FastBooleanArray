@@ -195,9 +195,15 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 
 ---
 
+# Why not use BigInt or larger array?
+
+Backwards compatibility with older version of NodeJS and browsers.
+
+---
+
 ## Contributing
 
-Contributions are welcome! If you'd like to report a bug, suggest a feature, or submit a pull request, please visit the [GitHub repository](https://github.com/yourusername/fast-boolean-array).
+Contributions are welcome! If you'd like to report a bug, suggest a feature, or submit a pull request, please visit the [GitHub repository](https://github.com/ultracakebakery/FastBooleanArray).
 
 ---
 
