@@ -89,7 +89,7 @@ Gets the boolean value at the specified index.
 
 ---
 
-# Fast Boolean Array vs Vanilla JavaScript Array Performance
+# Performance Breakdown
 
 Our benchmark compares the performance of our Fast Boolean Array library against Vanilla JavaScript arrays in terms of get and set operations across varying numbers of Booleans. The results below reflect an updated benchmark algorithm that performs 1,000 runs for each x amount of Booleans to better simulate real-world scenarios.
 
@@ -97,84 +97,101 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 
 ### 1 Boolean
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 0.00      | 0.00        |
-| Set Fast Boolean Array | 0.00      | 0.00        |
-| Get Vanilla Array      | 0.00      | N/A         |
-| Get Fast Boolean Array | 0.00      | N/A         |
+| Test                   | Time (ms)  | Memory (Bytes) | Booleans |
+| ---------------------- | ---------- | -------------- | -------- |
+| Set Vanilla Array      | 0.00236000 | 8              | 1        |
+| Set Fast Boolean Array | 0.00423000 | 6              | 1        |
+| Get Vanilla Array      | 0.00053000 | N/A            | 1        |
+| Get Fast Boolean Array | 0.00291000 | N/A            | 1        |
 
-**Observation:** At 1 boolean, both arrays remain equal in terms of performance and memory usage. Differences in performance are effectively immessurable, and one can assume practically identical.
+**Observation:** For **1 boolean**, the **Fast Boolean Array** is **1.8x slower** for **Set** and **5.5x slower** for **Get** operations. Memory usage is nearly identical, with a small advantage for the **Fast Boolean Array** in terms of bytes.
+
+---
 
 ### 100 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 0.00      | 0.00        |
-| Set Fast Boolean Array | 0.00      | 0.00        |
-| Get Vanilla Array      | 0.00      | N/A         |
-| Get Fast Boolean Array | 0.00      | N/A         |
+| Test                   | Time (ms)  | Memory (Bytes) | Booleans |
+| ---------------------- | ---------- | -------------- | -------- |
+| Set Vanilla Array      | 0.00332000 | 107            | 100      |
+| Set Fast Boolean Array | 0.00824000 | 18             | 100      |
+| Get Vanilla Array      | 0.00149000 | N/A            | 100      |
+| Get Fast Boolean Array | 0.00581000 | N/A            | 100      |
 
-**Observation:** At 100 booleans, both arrays remain equal in terms of performance and memory usage. Differences in performance are effectively immessurable, and one can assume practically identical.
+**Observation:** For **100 booleans**, the **Fast Boolean Array** is **2.5x slower** in **Set** operations but **3.9x more memory efficient**. For **Get** operations, it is **3.9x slower** than the **Vanilla Array**.
+
+---
 
 ### 1,000 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 0.01      | 0.00        |
-| Set Fast Boolean Array | 0.00      | 0.00        |
-| Get Vanilla Array      | 0.00      | N/A         |
-| Get Fast Boolean Array | 0.00      | N/A         |
+| Test                   | Time (ms)  | Memory (Bytes) | Booleans |
+| ---------------------- | ---------- | -------------- | -------- |
+| Set Vanilla Array      | 0.09599000 | 1009           | 1000     |
+| Set Fast Boolean Array | 0.04467000 | 130            | 1000     |
+| Get Vanilla Array      | 0.01261000 | N/A            | 1000     |
+| Get Fast Boolean Array | 0.05476000 | N/A            | 1000     |
 
-**Observation:** At 1,000 booleans, the Fast Boolean Array is **10x** faster in set operations and uses **8x** less memory as expected. We have not yet been able to messure in actual bytes.
+**Observation:** For **1,000 booleans**, the **Fast Boolean Array** is **2.1x faster** for **Set** operations and uses **7.7x less memory**. However, it is **4.3x slower** for **Get** operations compared to the **Vanilla Array**.
+
+---
 
 ### 10,000 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 0.06      | 0.01        |
-| Set Fast Boolean Array | 0.02      | 0.00        |
-| Get Vanilla Array      | 0.01      | N/A         |
-| Get Fast Boolean Array | 0.01      | N/A         |
+| Test                   | Time (ms)  | Memory (Bytes) | Booleans |
+| ---------------------- | ---------- | -------------- | -------- |
+| Set Vanilla Array      | 0.30075000 | 10009          | 10000    |
+| Set Fast Boolean Array | 0.04225000 | 1256           | 10000    |
+| Get Vanilla Array      | 0.06054000 | N/A            | 10000    |
+| Get Fast Boolean Array | 0.12325000 | N/A            | 10000    |
 
-**Observation:** For 10,000 booleans, Fast Boolean Array is **3x** faster in set operations and uses **8x** less memory as expected.
+**Observation:** For **10,000 booleans**, the **Fast Boolean Array** is **7.1x faster** in **Set** operations and uses **8x less memory**. The **Get** operation is **2x slower** with the **Fast Boolean Array** compared to the **Vanilla Array**.
+
+---
 
 ### 100,000 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 1.37      | 0.10        |
-| Set Fast Boolean Array | 0.21      | 0.01        |
-| Get Vanilla Array      | 0.05      | N/A         |
-| Get Fast Boolean Array | 0.07      | N/A         |
+| Test                   | Time (ms)  | Memory (Bytes) | Booleans |
+| ---------------------- | ---------- | -------------- | -------- |
+| Set Vanilla Array      | 1.67949000 | 100011         | 100000   |
+| Set Fast Boolean Array | 0.15400000 | 12506          | 100000   |
+| Get Vanilla Array      | 0.04920000 | N/A            | 100000   |
+| Get Fast Boolean Array | 0.07523000 | N/A            | 100000   |
 
-**Observation:** At 100,000 booleans, Fast Boolean Array is approximately **6.5x** faster in set operations and uses **8x** less memory as expected.
+**Observation:** For **100,000 booleans**, the **Fast Boolean Array** is **10.9x faster** in **Set** operations and uses **8x less memory**. However, it is **1.5x slower** for **Get** operations.
+
+---
 
 ### 1,000,000 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 19.62     | 0.95        |
-| Set Fast Boolean Array | 2.02      | 0.12        |
-| Get Vanilla Array      | 0.48      | N/A         |
-| Get Fast Boolean Array | 0.71      | N/A         |
+| Test                   | Time (ms)   | Memory (Bytes) | Booleans |
+| ---------------------- | ----------- | -------------- | -------- |
+| Set Vanilla Array      | 20.07889000 | 1000011        | 1000000  |
+| Set Fast Boolean Array | 3.42817000  | 125007         | 1000000  |
+| Get Vanilla Array      | 0.49531000  | N/A            | 1000000  |
+| Get Fast Boolean Array | 0.74617000  | N/A            | 1000000  |
 
-**Observation:** For 1,000,000 booleans, Fast Boolean Array is nearly **10x** faster in set operations and uses **8x** less memory as expected.
+**Observation:** For **1,000,000 booleans**, the **Fast Boolean Array** is **5.9x faster** for **Set** operations and uses **8x less memory**. The **Get** operation is **1.5x slower** for the **Fast Boolean Array**.
+
+---
 
 ### 10,000,000 Booleans
 
-| Test                   | Time (ms) | Memory (MB) |
-| ---------------------- | --------- | ----------- |
-| Set Vanilla Array      | 259.10    | 9.54        |
-| Set Fast Boolean Array | 21.57     | 1.19        |
-| Get Vanilla Array      | 4.90      | N/A         |
-| Get Fast Boolean Array | 7.21      | N/A         |
+| Test                   | Time (ms)    | Memory (Bytes) | Booleans |
+| ---------------------- | ------------ | -------------- | -------- |
+| Set Vanilla Array      | 266.65778000 | 10000013       | 10000000 |
+| Set Fast Boolean Array | 35.53492000  | 1250007        | 10000000 |
+| Get Vanilla Array      | 4.90792000   | N/A            | 10000000 |
+| Get Fast Boolean Array | 7.57038000   | N/A            | 10000000 |
 
-**Observation:** At 10,000,000 booleans, Fast Boolean Array is about **12x** faster in set operations and uses nearly **8x** less memory as expected compared to Vanilla.
+**Observation:** For **10,000,000 booleans**, the **Fast Boolean Array** is **7.5x faster** for **Set** operations and uses **8x less memory**. However, the **Get** operation is **1.5x slower** for the **Fast Boolean Array**.
 
-## Summary
+---
 
-This updated benchmark confirms that the Fast Boolean Array library excels in scenarios involving large datasets, offering substantial improvements in set operation performance and memory efficiency. The sweet spot remains around 100,000 indexes, where the library achieves its most pronounced gains (6.5x faster and much lower memory usage) over Vanilla JavaScript arrays.
+### Summary
+
+- The **Fast Boolean Array** is significantly more efficient in terms of memory usage and **Set** operation speeds, particularly as the number of booleans increases.
+  - For example, at **10,000,000 booleans**, it is **7.5x faster** in **Set** operations and uses **8x less memory**.
+- The **Get** operation, however, tends to be slower for the **Fast Boolean Array**, with it being up to **1.5x slower** compared to the **Vanilla Array** in larger datasets.
+- If memory efficiency and **Set** performance are priorities, the **Fast Boolean Array** is clearly advantageous, but if **Get** performance is more important, the **Vanilla Array** may still offer better results for certain use cases.
 
 ---
 

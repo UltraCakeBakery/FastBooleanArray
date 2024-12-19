@@ -55,7 +55,9 @@ export default class FastBooleanArray {
 	 * @throws {RangeError} If the index is out of bounds (less than 0 or greater than or equal to the array size).
 	 */
 	get(index: number) {
-		return !!(this.buffer[index >> 3] & (1 << index % 8)); // Check bit
+		const byteIndex = index >>> 3; // index divided by 8 (shifted)
+		const bitIndex = index & 7; // index modulo 8 (masking)
+		return (this.buffer[byteIndex] & (1 << bitIndex)) !== 0; // Direct comparison is faster than double negation !!
 	}
 
 	/**
