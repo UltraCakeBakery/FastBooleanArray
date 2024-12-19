@@ -1,0 +1,36 @@
+{
+  "name": "fast-boolean-array",
+  "version": "1.1.1",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "check": "npm run check:types",
+    "check:types": "npx --yes @arethetypeswrong/cli --pack .",
+    "build": "tsup src/index.ts --dts --format cjs,esm --clean --sourcemap"
+  },
+  "keywords": [
+    "boolean",
+    "array",
+    "fast",
+    "efficient",
+    "map"
+  ],
+  "author": "Jack van der Bilt",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "tsup": "^8.3.5"
+  }
+}
