@@ -15,6 +15,7 @@ View detailed benchmark results below.
 ## Installation
 
 Install the package via npm:
+
 ```bash
 npm install fast-boolean-array
 ```
@@ -26,21 +27,22 @@ npm install fast-boolean-array
 Here's how to use the Fast Boolean Array:
 
 ```javascript
-const BooleanArray = require('fast-boolean-array');
+import BooleanArray from 'fast-boolean-array';
+// const BooleanArray = require('fast-boolean-array'); works too
 
 // Create a new BooleanArray with the desired size
-const booleans = new BooleanArray(10);
+const booleans = new BooleanArray(2);
 
 // Set a value at a specific index
 booleans.set(0, true);
-
-// Get the value at a specific index
-console.log(booleans.get(0)); // Output: true
-
-// Set another value
 booleans.set(1, false);
 
 // Retrieve it
+console.log(booleans.get(0)); // Output: true
+console.log(booleans.get(1)); // Output: false
+
+
+booleans.set(3, false); // will throw as the array is only 3 in size
 console.log(booleans.get(1)); // Output: false
 ```
 
@@ -49,12 +51,14 @@ console.log(booleans.get(1)); // Output: false
 ## API
 
 ### `new BooleanArray(size)`
+
 Creates a new boolean array of the given size. All values are initialized to `false`.
 
 - **Parameters:**
   - `size` (number): The number of booleans the array should hold.
 
 ### `set(index, value)`
+
 Sets the boolean value at the specified index.
 
 - **Parameters:**
@@ -62,9 +66,11 @@ Sets the boolean value at the specified index.
   - `value` (boolean): The value to set (`true` or `false`).
 
 ### `get(index)`
+
 Gets the boolean value at the specified index.
 
 - **Parameters:**
+
   - `index` (number): The position in the array to retrieve the value.
 
 - **Returns:**
@@ -87,76 +93,84 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 ## Performance Breakdown
 
 ### 1 Boolean
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 0.00      | 0.00        |
-| Set Fast Boolean Array   | 0.00      | 0.00        |
-| Get Vanilla Array        | 0.00      | N/A         |
-| Get Fast Boolean Array   | 0.00      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 0.00      | 0.00        |
+| Set Fast Boolean Array | 0.00      | 0.00        |
+| Get Vanilla Array      | 0.00      | N/A         |
+| Get Fast Boolean Array | 0.00      | N/A         |
 
 **Observation:** At 1 boolean, both arrays remain equal in terms of performance and memory usage. Differences in performance are effectively immessurable, and one can assume practically identical.
 
 ### 100 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 0.00      | 0.00        |
-| Set Fast Boolean Array   | 0.00      | 0.00        |
-| Get Vanilla Array        | 0.00      | N/A         |
-| Get Fast Boolean Array   | 0.00      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 0.00      | 0.00        |
+| Set Fast Boolean Array | 0.00      | 0.00        |
+| Get Vanilla Array      | 0.00      | N/A         |
+| Get Fast Boolean Array | 0.00      | N/A         |
 
 **Observation:** At 100 booleans, both arrays remain equal in terms of performance and memory usage. Differences in performance are effectively immessurable, and one can assume practically identical.
 
 ### 1,000 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 0.01      | 0.00        |
-| Set Fast Boolean Array   | 0.00      | 0.00        |
-| Get Vanilla Array        | 0.00      | N/A         |
-| Get Fast Boolean Array   | 0.00      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 0.01      | 0.00        |
+| Set Fast Boolean Array | 0.00      | 0.00        |
+| Get Vanilla Array      | 0.00      | N/A         |
+| Get Fast Boolean Array | 0.00      | N/A         |
 
 **Observation:** At 1,000 booleans, the Fast Boolean Array is **10x** faster in set operations and uses **8x** less memory as expected. We have not yet been able to messure in actual bytes.
 
 ### 10,000 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 0.06      | 0.01        |
-| Set Fast Boolean Array   | 0.02      | 0.00        |
-| Get Vanilla Array        | 0.01      | N/A         |
-| Get Fast Boolean Array   | 0.01      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 0.06      | 0.01        |
+| Set Fast Boolean Array | 0.02      | 0.00        |
+| Get Vanilla Array      | 0.01      | N/A         |
+| Get Fast Boolean Array | 0.01      | N/A         |
 
 **Observation:** For 10,000 booleans, Fast Boolean Array is **3x** faster in set operations and uses **8x** less memory as expected.
 
 ### 100,000 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 1.37      | 0.10        |
-| Set Fast Boolean Array   | 0.21      | 0.01        |
-| Get Vanilla Array        | 0.05      | N/A         |
-| Get Fast Boolean Array   | 0.07      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 1.37      | 0.10        |
+| Set Fast Boolean Array | 0.21      | 0.01        |
+| Get Vanilla Array      | 0.05      | N/A         |
+| Get Fast Boolean Array | 0.07      | N/A         |
 
 **Observation:** At 100,000 booleans, Fast Boolean Array is approximately **6.5x** faster in set operations and uses **8x** less memory as expected.
 
 ### 1,000,000 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 19.62     | 0.95        |
-| Set Fast Boolean Array   | 2.02      | 0.12        |
-| Get Vanilla Array        | 0.48      | N/A         |
-| Get Fast Boolean Array   | 0.71      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 19.62     | 0.95        |
+| Set Fast Boolean Array | 2.02      | 0.12        |
+| Get Vanilla Array      | 0.48      | N/A         |
+| Get Fast Boolean Array | 0.71      | N/A         |
 
 **Observation:** For 1,000,000 booleans, Fast Boolean Array is nearly **10x** faster in set operations and uses **8x** less memory as expected.
 
 ### 10,000,000 Booleans
-| Test                     | Time (ms) | Memory (MB) |
-|--------------------------|-----------|-------------|
-| Set Vanilla Array        | 259.10    | 9.54        |
-| Set Fast Boolean Array   | 21.57     | 1.19        |
-| Get Vanilla Array        | 4.90      | N/A         |
-| Get Fast Boolean Array   | 7.21      | N/A         |
+
+| Test                   | Time (ms) | Memory (MB) |
+| ---------------------- | --------- | ----------- |
+| Set Vanilla Array      | 259.10    | 9.54        |
+| Set Fast Boolean Array | 21.57     | 1.19        |
+| Get Vanilla Array      | 4.90      | N/A         |
+| Get Fast Boolean Array | 7.21      | N/A         |
 
 **Observation:** At 10,000,000 booleans, Fast Boolean Array is about **12x** faster in set operations and uses nearly **8x** less memory as expected compared to Vanilla.
 
 ## Summary
+
 This updated benchmark confirms that the Fast Boolean Array library excels in scenarios involving large datasets, offering substantial improvements in set operation performance and memory efficiency. The sweet spot remains around 100,000 indexes, where the library achieves its most pronounced gains (6.5x faster and much lower memory usage) over Vanilla JavaScript arrays.
 
 ---
@@ -176,4 +190,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgements
 
 Thank you to the open-source community for inspiration and support!
-

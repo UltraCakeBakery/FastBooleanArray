@@ -8,6 +8,9 @@ export default class FastBooleanArray {
 	}
 
 	set(input: number, value: boolean) {
+		if (input < 0 || input >= this.size) {
+			throw new RangeError('Index out of bounds');
+		}
 		if (value) {
 			this.buffer[input >> 3] |= 1 << (input & 7); // Set bit
 		} else {
@@ -16,6 +19,9 @@ export default class FastBooleanArray {
 	}
 
 	get(input: number) {
+		if (input < 0 || input >= this.size) {
+			throw new RangeError('Index out of bounds');
+		}
 		return (this.buffer[input >> 3] & (1 << input % 8)) !== 0; // Check bit
 	}
 
