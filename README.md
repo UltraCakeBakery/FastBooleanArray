@@ -2,16 +2,23 @@
 
 In JavaScript, when working with large arrays of boolean values, a common challenge is efficiently indexing and retrieving these values. Using a regular JavaScript array to store booleans is straightforward, but it is memory-inefficient. While booleans are conceptually 1-bit values, JavaScript engines, like V8 (in Chrome and Node.js), allocate 1 byte (8 bits) per boolean for optimization purposes. This can waste a significant amount of memory when dealing with large arrays.
 
-Fast Boolean Array solves this issue by utilizing bit manipulation to store booleans in a compact format. It uses a Uint8Array and stores each boolean as a single bit within the 8 bits of each byte. This allows you to index and retrieve boolean values by integers (e.g., the 0th boolean, 1st boolean, etc.) while only using a fraction of the memory. Each bit represents a boolean, and you can quickly access or modify a specific boolean using bitwise operations, making it both fast and memory-efficient.
+Fast Boolean Array solves this issue by utilizing bit manipulation to store booleans in a compact format. It uses a Uint8Array and stores each boolean as a single bit within the 8 bits of each byte. This allows you to index and retrieve boolean values by integers (e.g., the 0th boolean, 1st boolean, etc.) while only using a fraction of the memory.
 
 For detailed benchmark results, see below.
 
 ## Features
 
-- **Memory Efficiency**: Stores booleans in bits rather than bytes, drastically reducing memory usage.
-- **Simple API**: Intuitive methods for setting and getting values.
-- **Performance**: Optimized for use in scenarios where memory constraints are critical.
 
+- **Memory Efficiency**: Stores booleans in bits rather than bytes, drastically reducing memory usage.
+- **Fast Set Performance**: Up to 10x faster sets for fast data re-mapping.
+- **Familiar API**:  `Map` and `Set` like API for minimal learning curve. Intuitive helper functions, and works in `for.. of`.
+- **Array like interface**: call `.accessLikeArray()` to access it like an array`someArray[index]` (beware of the performance penalty caused by the Proxy)! 
+---
+
+## Why Use Fast Boolean Array?
+
+- **Easy to Use**: Familiar `Map` and `Set` like API for minimal learning curve.
+- **Scalable**: Suitable for high-performance, memory-sensitive projects.
 ---
 
 ## Installation
@@ -19,7 +26,8 @@ For detailed benchmark results, see below.
 Install the package via npm:
 
 ```bash
-npm install fast-boolean-array
+npm install fast-boolean-array --save-dev
+pnpm install fast-boolean-array --save-dev
 ```
 
 ---
@@ -30,7 +38,7 @@ Here's how to use the Fast Boolean Array:
 
 ```javascript
 import BooleanArray from 'fast-boolean-array';
-// const BooleanArray = require('fast-boolean-array'); works too
+// const BooleanArray = require('fast-boolean-array'); commonjs works too.
 
 // Create a new BooleanArray with the desired size
 const booleans = new BooleanArray(2);
@@ -81,14 +89,6 @@ Gets the boolean value at the specified index.
 
 ---
 
-## Why Use Fast Boolean Array?
-
-- **Efficient Memory Usage**: Ideal for applications handling large boolean arrays, such as data compression or state tracking.
-- **Easy to Use**: Familiar `Map` and `Set` like API for minimal learning curve.
-- **Scalable**: Suitable for high-performance, memory-sensitive projects.
-
----
-
 # Performance Breakdown
 
 Our benchmark compares the performance of our Fast Boolean Array library against Vanilla JavaScript arrays in terms of get and set operations across varying numbers of Booleans. The results below reflect an updated benchmark algorithm that performs 1,000 runs for each x amount of Booleans to better simulate real-world scenarios.
@@ -104,7 +104,7 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 | Get Vanilla Array      | 0.00053000 | N/A            | 1        |
 | Get Fast Boolean Array | 0.00291000 | N/A            | 1        |
 
-**Observation:** As useless as having just 1 boolean stored in an array might be, For **1 boolean**, the **Fast Boolean Array** is **1.8x slower** for **Set** and **5.5x slower** for **Get** operations. Memory usage is nearly identical, with a small advantage for the **Fast Boolean Array** in terms of bytes.
+As useless as having just 1 boolean stored in an array might be, For **1 boolean**, the **Fast Boolean Array** is **1.8x slower** for **Set** and **5.5x slower** for **Get** operations. Memory usage is nearly identical, with a small advantage for the **Fast Boolean Array** in terms of bytes.
 
 ---
 
@@ -130,7 +130,7 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 | Get Vanilla Array      | 0.01261000 | N/A            | 1000     |
 | Get Fast Boolean Array | 0.05476000 | N/A            | 1000     |
 
-**Observation:** For **1,000 booleans**, **Fast Boolean Array** is **2.1x faster** for **Set** operations and uses **7.7x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **4.3x slower** . compared to the **Vanilla Array**.
+For **1,000 booleans**, **Fast Boolean Array** is **2.1x faster** for **Set** operations and uses **7.7x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **4.3x slower** . compared to the **Vanilla Array**.
 
 ---
 
@@ -156,7 +156,7 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 | Get Vanilla Array      | 0.04920000 | N/A            | 100000   |
 | Get Fast Boolean Array | 0.07523000 | N/A            | 100000   |
 
-**Observation:** For **100,000 booleans**, **Fast Boolean Array** is **10.9x faster** in **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
+For **100,000 booleans**, **Fast Boolean Array** is **10.9x faster** in **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
 
 ---
 
@@ -169,7 +169,7 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 | Get Vanilla Array      | 0.49531000  | N/A            | 1000000  |
 | Get Fast Boolean Array | 0.74617000  | N/A            | 1000000  |
 
-**Observation:** For **1,000,000 booleans**, the **Fast Boolean Array** is **5.9x faster** for **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
+For **1,000,000 booleans**, the **Fast Boolean Array** is **5.9x faster** for **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
 
 ---
 
@@ -182,22 +182,19 @@ Our benchmark compares the performance of our Fast Boolean Array library against
 | Get Vanilla Array      | 4.90792000   | N/A            | 10000000 |
 | Get Fast Boolean Array | 7.57038000   | N/A            | 10000000 |
 
-**Observation:** For **10,000,000 booleans**, **Fast Boolean Array** is **7.5x faster** for **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
+For **10,000,000 booleans**, **Fast Boolean Array** is **7.5x faster** for **Set** operations and uses **8x less memory**. However, **Fast Boolean Array**'s' **Get** operation is **1.5x slower** .
 
 ---
 
 ### Summary
 
 - The **Fast Boolean Array** is significantly more efficient in terms of memory usage and **Set** operation speeds, particularly as the number of booleans increases.
-  - For example, at **10,000,000 booleans**, it is **7.5x faster** in **Set** operations and uses **8x less memory**.
-- The **Get** operation, however, tends to be slower for the **Fast Boolean Array**, with it being up to **1.5x slower** compared to the **Vanilla Array** in larger datasets.
-- If memory efficiency and **Set** performance are priorities, the **Fast Boolean Array** is clearly advantageous, but if **Get** performance is more important, the **Vanilla Array** may still offer better results for certain use cases.
+  - For example, as stated previously, at **10,000,000 booleans**, it is **7.5x faster** in **Set** operations and uses **8x less memory**.
+- The **Get** operation, however, tends to be slower on a **Fast Boolean Array**, with it being up to **1.5x slower** compared to the regular vanilla **boolean[]** in larger datasets.
 
----
+If memory efficiency and **Set** performance are priorities, the **Fast Boolean Array** is clearly advantageous, but if **Get** performance is more important, the **Vanilla Array** may still offer better results for certain use cases.
 
-# Why not use BigInt or larger array?
-
-Backwards compatibility with older version of NodeJS and browsers.
+We are still working on improving the performance of the toArray function, but you can already use it today to convert back to a vanilla array, though generating one from scratch is currently more effecient.
 
 ---
 
