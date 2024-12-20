@@ -1,4 +1,4 @@
-name: Test And Build
+name: 15 unit tests & optimized ESM/CJS builds
 
 on:
   push:
