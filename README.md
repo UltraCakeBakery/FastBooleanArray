@@ -1,5 +1,7 @@
 # Fast Boolean Array
 
+![CI](https://github.com/UltraCakeBakery/FastBooleanArray/actions/workflows/ci.yml/badge.svg)
+
 In JavaScript, when working with large arrays of boolean values, a common challenge is efficiently indexing and retrieving these values. Using a regular JavaScript array to store booleans is straightforward, but it is memory-inefficient. While booleans are conceptually 1-bit values, JavaScript engines, like V8 (in Chrome and Node.js), allocate 1 byte (8 bits) per boolean for optimization purposes. This can waste a significant amount of memory when dealing with large arrays.
 
 Fast Boolean Array solves this issue by utilizing bit manipulation to store booleans in a compact format. It uses a Uint8Array and stores each boolean as a single bit within the 8 bits of each byte. This allows you to index and retrieve boolean values by integers (e.g., the 0th boolean, 1st boolean, etc.) while only using a fraction of the memory.
@@ -8,17 +10,18 @@ For detailed benchmark results, see below.
 
 ## Features
 
-
 - **Memory Efficiency**: Stores booleans in bits rather than bytes, drastically reducing memory usage.
 - **Fast Set Performance**: Up to 10x faster sets for fast data re-mapping.
-- **Familiar API**:  `Map` and `Set` like API for minimal learning curve. Intuitive helper functions, and works in `for.. of`.
-- **Array like interface**: call `.accessLikeArray()` to access it like an array`someArray[index]` (beware of the performance penalty caused by the Proxy)! 
+- **Familiar API**: `Map` and `Set` like API for minimal learning curve. Intuitive helper functions, and works in `for.. of`.
+- **Array like interface**: call `.accessLikeArray()` to access it like an array`someArray[index]` (beware of the performance penalty caused by the Proxy)!
+
 ---
 
 ## Why Use Fast Boolean Array?
 
 - **Easy to Use**: Familiar `Map` and `Set` like API for minimal learning curve.
 - **Scalable**: Suitable for high-performance, memory-sensitive projects.
+
 ---
 
 ## Installation
@@ -37,7 +40,7 @@ pnpm install fast-boolean-array --save-dev
 Here's how to use the Fast Boolean Array:
 
 ```javascript
-import BooleanArray from 'fast-boolean-array';
+import BooleanArray from "fast-boolean-array";
 // const BooleanArray = require('fast-boolean-array'); commonjs works too.
 
 // Create a new BooleanArray with the desired size
