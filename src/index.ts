@@ -84,8 +84,8 @@ export default class FastBooleanArray {
     newBuffer.set(
       this.buffer.subarray(0, Math.min(this.buffer.length, newBuffer.length))
     );
-    this.buffer = newBuffer;
     this.size = newSize;
+    this.buffer = newBuffer;
   }
 
   get length() {
@@ -140,11 +140,12 @@ export default class FastBooleanArray {
       set: (target, prop, value) => {
         if (typeof prop === "string" && !isNaN(Number(prop))) {
           const index = Number(prop);
-          return target.set(index, value as never);
+          target.set(index, value as never);
+        } else {
+          target[prop as Exclude<keyof FastBooleanArray, "length">] = value;
         }
 
-        return (target[prop as Exclude<keyof FastBooleanArray, "length">] =
-          value);
+        return true;
       },
     });
   }
