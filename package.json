@@ -25,9 +25,8 @@
     }
   },
   "scripts": {
-    "check": "npm run check:types ; npm run check:test",
-    "check:test": "vitest",
-    "check:types": "npx --yes @arethetypeswrong/cli --pack .",
+    "test": "vitest",
+    "check-types": "npx --yes @arethetypeswrong/cli --pack .",
     "build": "tsup src/index.ts --dts --format cjs,esm --clean --sourcemap --minify",
     "publish": "npm publish"
   },

@@ -1,4 +1,4 @@
-name: TESTS
+name: CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Specify the Node.js version you're using
+          node-version: 18 # Specify your Node.js version
 
       - name: Install dependencies
         run: npm install
@@ -27,5 +27,8 @@ jobs:
       - name: Run build
         run: npm run build
 
+      - name: Check types
+        run: npm run check-types
+
       - name: Run tests
-        run: npm run check
+        run: npm run test
