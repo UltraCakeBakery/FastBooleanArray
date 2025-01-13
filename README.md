@@ -15,13 +15,6 @@ For detailed benchmark results, see below.
 
 ---
 
-## Why Use Fast Boolean Array?
-
-- **Easy to Use**: Familiar `Map` and `Set` like API for minimal learning curve.
-- **Scalable**: Suitable for high-performance, memory-sensitive projects.
-
----
-
 ## Installation
 
 Install the package via npm:
