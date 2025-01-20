@@ -15,18 +15,7 @@ For detailed benchmark results, see below.
 
 ---
 
-## Installation
-
-Install the package via npm:
-
-```bash
-npm install fast-boolean-array --save-dev
-pnpm install fast-boolean-array --save-dev
-```
-
----
-
-## Usage
+## Usage example:
 
 Here's how to use the Fast Boolean Array:
 
@@ -34,21 +23,32 @@ Here's how to use the Fast Boolean Array:
 import BooleanArray from "fast-boolean-array";
 // const BooleanArray = require('fast-boolean-array'); commonjs works too.
 
-// Create a new BooleanArray with the desired size
+// Create a new BooleanArray with the desired length
 const booleans = new BooleanArray(2);
 
 // Set a value at a specific index
 booleans.set(0, true);
 booleans.set(1, false);
 
-// Retrieve it
+// Retrieve a value at a specific index
 console.log(booleans.get(0)); // Output: true
 console.log(booleans.get(1)); // Output: false
 
 booleans.set(3, true); // will not throw, but returns false as the boolean is not found
 console.log(booleans.get(3)); // Output: false
 
-booleans.setSafe(3, true); // will throw RangeError
+booleans.setSafe(3, true); // will throw RangeError because the array has a length of 2
+```
+
+---
+
+## Installation
+
+Install the package:
+
+```bash
+npm install fast-boolean-array
+pnpm install fast-boolean-array
 ```
 
 ---
