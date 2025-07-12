@@ -19,6 +19,21 @@ describe("FastBooleanArray", () => {
     expect(array.get(2)).toBe(true);
   });
 
+  test("set and get should REALLY work correctly", () => {
+    const array = new FastBooleanArray(200_000);
+
+    // Set values: false for even, true for odd
+    for (let i = 0; i < array.size; i++) {
+      array.set(i, i % 2 === 1);
+    }
+
+    // Verify values
+    for (let i = 0; i < array.size; i++) {
+      const expected = i % 2 === 1;
+      expect(array.get(i)).toBe(expected);
+    }
+  });
+
   test("setSafe and getSafe should throw on out-of-bounds access", () => {
     const array = new FastBooleanArray(16);
     expect(() => array.setSafe(16, true)).toThrow("Index out of bounds");
