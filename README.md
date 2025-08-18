@@ -85,7 +85,7 @@ Gets the boolean value at the specified index.
 
 # Performance Breakdown
 
-Our benchmark compares the performance of our Fast Boolean Array library against Vanilla JavaScript arrays in terms of get and set operations across varying numbers of Booleans. The results below reflect an updated benchmark algorithm that performs 1,000 runs for each x amount of Booleans to better simulate real-world scenarios.
+Our benchmark compares the performance of our Fast Boolean Array library against Vanilla JavaScript arrays in terms of get and set operations across varying numbers of Booleans. The results below reflect an updated benchmark algorithm that performs 1,000 runs for each x amount of Booleans to better simulate real-world scenarios. Generally you will notice the trend that as the size of the array grows, so does the justification of using our library instead of a regular vanilla JavaScript array.
 
 ## Performance Breakdown
 
@@ -111,7 +111,7 @@ As useless as having just 1 boolean stored in an array might be, For **1 boolean
 | Get Vanilla Array      | 0.00149000 | N/A            | 100      |
 | Get Fast Boolean Array | 0.00581000 | N/A            | 100      |
 
-**Observation:** For **100 booleans**, **Fast Boolean Array** is **2.5x slower** in **Set** operations but **3.9x more memory efficient**. However, **Fast Boolean Array**'s' **Get** operation is **3.9x slower** . compared to the **Vanilla Array**.
+For **100 booleans**, **Fast Boolean Array** is **2.5x slower** in **Set** operations but **3.9x more memory efficient**. However, **Fast Boolean Array**'s' **Get** operation is **3.9x slower** . compared to the **Vanilla Array**.
 
 ---
 
